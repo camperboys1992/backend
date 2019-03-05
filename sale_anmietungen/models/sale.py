@@ -23,3 +23,23 @@ class SaleOrder(models.Model):
 				'x_studio_ende_der_reise_1': res.x_studio_bis
 			})
 		return res
+		
+	@api.multi
+	def write(self, vals):
+		res = super(SaleOrder, self).write(vals)
+		for rec in self:
+			if vals.get('sale_type') == 'sale':
+				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
+				x_m.unlink()
+				
+			if vals.get('x_studio_von') and rec.sale_type == 'rental':
+				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
+				x_m.write({
+					'x_studio_beginin_der_reise_1': rec.x_studio_von
+				})
+			if vals.get('x_studio_bis') and rec.sale_type == 'rental':
+				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
+				x_m.write({
+					'x_studio_ende_der_reise_1': rec.x_studio_bis
+				})
+		return res
