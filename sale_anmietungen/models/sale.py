@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
 	@api.model
 	def create(self, vals):
 		res = super(SaleOrder, self).create(vals)
-		if res.sale_type == 'rental':
+		if vals.get('sale_type') == 'rental':
 			self.env['x_mieter'].create({
 				'x_studio_buchungsnummer': res.id,
 				'x_name': res.name,
