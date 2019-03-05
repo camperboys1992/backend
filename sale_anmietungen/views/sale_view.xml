@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">view.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]" position="before">
+                <div>
+					<field name="sale_type" widget="radio" options="{'horizontal': true}"/>
+				</div>
+            </xpath>
+        </field>
+    </record>
+	
+	<record id="view_sale_order_studio_inherit" model="ir.ui.view">
+        <field name="name">view.sale.order.studio.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="studio_customization.odoo_studio_sale_ord_bb4d481b-8602-4eb5-ac3e-57a499c90c36"/>
+        <field name="arch" type="xml">
+			<field name="x_studio_von" position="attributes">
+				<attribute name="attrs">{'invisible': [('sale_type', '=', 'sale')], 'required': [('sale_type', '=', 'rental')]}</attribute>
+			</field>
+			<field name="x_studio_bis" position="attributes">
+				<attribute name="attrs">{'invisible': [('sale_type', '=', 'sale')], 'required': [('sale_type', '=', 'rental')]}</attribute>
+			</field>
+        </field>
+    </record>
+	
+</odoo>
