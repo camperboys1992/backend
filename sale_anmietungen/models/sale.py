@@ -34,12 +34,28 @@ class SaleOrder(models.Model):
 				
 			if vals.get('x_studio_von') and rec.sale_type == 'rental':
 				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
-				x_m.write({
-					'x_studio_beginin_der_reise_1': rec.x_studio_von
-				})
-			if vals.get('x_studio_bis') and rec.sale_type == 'rental':
+				if x_m:
+					x_m.write({
+						'x_studio_beginin_der_reise_1': rec.x_studio_von
+					})
+				else:
+					self.env['x_mieter'].create({
+						'x_studio_buchungsnummer': rec.id,
+						'x_name': rec.name,
+						'x_studio_beginin_der_reise_1': rec.x_studio_von,
+						'x_studio_ende_der_reise_1': rec.x_studio_bis
+					})
+			elif vals.get('x_studio_bis') and rec.sale_type == 'rental':
 				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
-				x_m.write({
-					'x_studio_ende_der_reise_1': rec.x_studio_bis
-				})
+				if x_m:
+					x_m.write({
+						'x_studio_ende_der_reise_1': rec.x_studio_bis
+					})
+				else:
+					self.env['x_mieter'].create({
+						'x_studio_buchungsnummer': rec.id,
+						'x_name': rec.name,
+						'x_studio_beginin_der_reise_1': rec.x_studio_von,
+						'x_studio_ende_der_reise_1': rec.x_studio_bis
+					})
 		return res
