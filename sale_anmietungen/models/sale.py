@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
@@ -16,11 +19,13 @@ class SaleOrder(models.Model):
 	def create(self, vals):
 		res = super(SaleOrder, self).create(vals)
 		if vals.get('sale_type') == 'rental':
+			_logger.info(">>>>>>>>>>>>> %s", vals)
+			_logger.info(">>>>>>>>>>>>> %s", res.id)
 			self.env['x_mieter'].create({
 				'x_studio_buchungsnummer': res.id,
-				'x_name': vals.get('name'),
-				'x_studio_beginin_der_reise_1': vals.get('x_studio_von'),
-				'x_studio_ende_der_reise_1': vals.get('x_studio_bis'),
+				'x_name': res.name,
+				'x_studio_beginin_der_reise_1': res.x_studio_von,
+				'x_studio_ende_der_reise_1': res.x_studio_bis
 			})
 		return res
 		
@@ -31,11 +36,11 @@ class SaleOrder(models.Model):
 			if vals.get('sale_type') == 'sale':
 				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
 				x_m.unlink()
-			elif rec.sale_type == 'rental':
+			if vals.get('sale_type') == 'rental':
 				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
 				if x_m:
 					x_m.write({
-						'x_studio_beginin_der_reise_1': rec.x_studio_von,
+						'x_studio_beginin_der_reise_1': rec.x_studio_von
 						'x_studio_ende_der_reise_1': rec.x_studio_bis
 					})
 				else:
