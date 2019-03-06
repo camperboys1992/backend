@@ -40,7 +40,7 @@ class SaleOrder(models.Model):
 				x_m = self.env['x_mieter'].search([('x_studio_buchungsnummer','=', rec.id)])
 				if x_m:
 					x_m.write({
-						'x_studio_beginin_der_reise_1': rec.x_studio_von
+						'x_studio_beginin_der_reise_1': rec.x_studio_von,
 						'x_studio_ende_der_reise_1': rec.x_studio_bis
 					})
 				else:
