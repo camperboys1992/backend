@@ -9,7 +9,7 @@ class FleetVehicle(models.Model):
 	@api.multi
 	def send_att_mail(self):
 		for rec in self:
-			template = self.env['mail.template'].search([('name','=', 'übergabe')], limit="1")
+			template = self.env['mail.template'].search([('name','=','übergabe')],limit=1)
 				
 			attachment = self.env['ir.attachment'].create({
 				'datas_fname': 'Driver Log',
