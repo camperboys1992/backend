@@ -9,7 +9,7 @@ class FleetVehicle(models.Model):
 	@api.multi
 	def send_att_mail(self):
 		for rec in self:
-			template = self.ref('studio_customization.handover_mail')
+			template = self.env.ref('studio_customization.handover_mail')
 			_logger.info('>>>>>>>>>>> %s', template)
 			if template:
 				attachment = self.env['ir.attachment'].create({
