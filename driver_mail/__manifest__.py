@@ -4,7 +4,7 @@
     'author': "Onedoos",
     'summary': "Mail sending",
     'depends': [
-		'fleet', 'studio_customization'
+		'fleet',
     ],
     'data': [
     ],
