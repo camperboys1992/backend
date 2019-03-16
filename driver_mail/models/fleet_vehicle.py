@@ -24,3 +24,6 @@ class FleetVehicle(models.Model):
 				})
 					
 				template.send_mail(rec.id, force_send=True)
+				#do a clean up
+				template.attachment_ids.unlink()
+				attachment.unlink()
