@@ -13,7 +13,7 @@ class FleetVehicle(models.Model):
 			_logger.info('>>>>>>>>>>> %s', template)
 			if template:
 				attachment = self.env['ir.attachment'].create({
-					'datas_fname': 'Driver Log',
+					'datas_fname': 'Driver Log.pdf',
 					'name': 'Driver Log',
 					'datas': rec.x_studio_field_Ru46t
 				})
