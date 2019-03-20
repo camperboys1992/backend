@@ -22,6 +22,20 @@ class FleetVehicle(models.Model):
 				})
 					
 				template.send_mail(rec.id, force_send=True)
-				#do a clean up
-				template.attachment_ids.unlink()
-				attachment.unlink()
+				
+	@api.multi
+	def send_return_mail(self):
+		for rec in self:
+			template = self.env.ref('studio_customization.returnprotocol')
+			if template:
+				attachment = self.env['ir.attachment'].create({
+					'datas_fname': 'Return Protocol.pdf',
+					'name': 'Return Protocol',
+					'datas': rec.x_studio_return_protocol_1
+				})
+				
+				template.write({
+					'attachment_ids': [(6, 0, [attachment.id])],
+				})
+					
+				template.send_mail(rec.id, force_send=True)
