@@ -51,3 +51,9 @@ class SaleOrder(models.Model):
 						'x_studio_ende_der_reise_1': rec.x_studio_bis
 					})
 		return res
+		
+	@api.multi
+	def action_cancel(self, vals):
+		res = super(SaleOrder, self).action_cancel()
+		self.env['x_mieter'].search([('x_studio_buchungsnummer','=',self.id)]).unlink()
+		return res

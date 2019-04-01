@@ -30,7 +30,7 @@ class FleetVehicle(models.Model):
 			if template:
 				attachment = self.env['ir.attachment'].create({
 					'datas_fname': 'Return Protocol.pdf',
-					'name': 'Return Protocol',
+					'name': 'Return Protocol.pdf',
 					'datas': rec.x_studio_return_protocol_1
 				})
 				
