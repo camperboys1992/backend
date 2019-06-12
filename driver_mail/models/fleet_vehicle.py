@@ -5,6 +5,7 @@ _logger = logging.getLogger(__name__)
 	
 class FleetVehicle(models.Model):
 	_inherit = 'fleet.vehicle.assignation.log'
+	_order = 'create_date desc'
 	
 	@api.multi
 	def send_att_mail(self):

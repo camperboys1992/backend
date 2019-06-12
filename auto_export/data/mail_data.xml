@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template and notification section -->
+    <data noupdate="1">
+        <record id="export_mail_csv" model="mail.template">
+            <field name="name">Auto Export: send by mail</field>
+            <field name="model_id" ref="auto_export.model_model_export"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.email}</field>
+            <field name="subject">${object.name}</field>
+            <field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+					<p style="margin: 0px; padding: 0px; font-size: 13px;">
+						Hi,
+						Kindly find the attached exported data for ${object.export_id.name}
+						
+						Best Regards.
+					</p>
+				</div>
+            </field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>
