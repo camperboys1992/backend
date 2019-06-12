@@ -20,7 +20,7 @@ class ModelExport(models.Model):
 	name = fields.Char(string="Title", required=True)
 	email = fields.Char(required=True)
 	is_active = fields.Boolean(default=True, string="Active")
-	export_id = fields.Many2one('ir.exports')
+	export_id = fields.Many2one('ir.exports', required=True)
 	user_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user, copy=False)
 	
 	
