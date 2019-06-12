@@ -18,7 +18,7 @@
 			</div>
 			<group>
 				<group>
-					<field name="export_id"/>
+					<field name="export_id" options="{'no_create': True, 'no_create_edit':True}"/>
 					<field name="is_active"/>
 				</group>
 				<group>
