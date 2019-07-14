@@ -4,7 +4,8 @@ import logging
 _logger = logging.getLogger(__name__)
 	
 class FleetVehicle(models.Model):
-	_inherit = 'fleet.vehicle.assignation.log'
+	_name = 'fleet.vehicle.assignation.log'
+	_inherit = ['fleet.vehicle.assignation.log','portal.mixin', 'mail.thread', 'mail.activity.mixin']
 	_order = 'create_date desc'
 	
 	@api.multi

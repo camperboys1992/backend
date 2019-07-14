@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="fleet_chatter_form" model="ir.ui.view">
+            <field name="name">fleet</field>
+            <field name="model">fleet.vehicle.assignation.log</field>
+            <field name="inherit_id" ref="studio_customization.default_form_view_fo_4c6c3495-1111-4fff-abb3-c7f61d77db11"/>
+            <field name="arch" type="xml">
+				<xpath expr="//sheet" position="after">
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+						<field name="activity_ids" widget="mail_activity"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

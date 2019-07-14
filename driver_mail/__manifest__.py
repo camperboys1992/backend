@@ -7,6 +7,7 @@
 		'fleet',
     ],
     'data': [
+		'views/fleet_log_view.xml',
     ],
     'installable': True,
 }
